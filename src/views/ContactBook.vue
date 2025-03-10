@@ -4,7 +4,7 @@
             <InputSearch v-model="searchText" />
         </div>
         <div class="mt-3 col-md-6">
-            <h4><i class=" fasfa-address-book"></i></h4>
+            <h4><i class=" fas fa-address-book"></i></h4>
             <ContactList v-if="filteredContactsCount > 0" :contacts="filteredContacts" v-model:active-index="activeIndex" />
             <p v-else> Không có liên hệ nào.</p>
             <div class="mt-3 row justify-content-around align-items-center">
@@ -23,12 +23,15 @@
                 </div>
         </div>
         <div class="mt-3 col-md-6">
-            <div v-if="activeCotact">
+            <div v-if="activeContact">
                 <h4>
                     Chi tiết Liên hệ
                     <i class="fas fa-address-card"></i>
                 </h4>
                 <ContactCard :contact="activeContact" />
+                <router-link :to="{name: 'contact.edit', params:{ id: activeContact._id}}">
+                    <span class="mt-2 badge badge-warning"><i class="fa fa-edit"></i> Hiệu chỉnh</span>
+                </router-link>
             </div>
         </div>
     </div>
@@ -49,7 +52,7 @@ export default {
     data(){
         return{ 
             contacts: [],
-            activeInedx: -1,
+            activeIndex: -1,
             searchText: "",
         };
     },
